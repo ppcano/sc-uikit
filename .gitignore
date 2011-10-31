@@ -3,4 +3,5 @@
 tmp
 vendor
 assets
+NERD_tree*
 .DS_Store

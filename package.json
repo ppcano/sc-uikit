@@ -1,39 +1,37 @@
 {
   "name": "sc-uikit",
-  "bpm": "1.0.0", // this is the requirement for being a bpm package
+  "bpm": "1.0.0",
   "summary": "SproutCore UI Kit",
   "author": "Pepe Cano",
-  "version": "0.1",
-
-
+  "version": "1.0.0",
   "directories": {
     "lib": "lib",
     "tests": "tests"
   },
-
   "dependencies": {
     "spade": ">= 0",
     "sproutcore-ui": "~> 2.0",
-    "sproutcore-touch": "=> 0",
+    "sproutcore-touch": ">= 0",
     "sproutcore": ">= 0"
   },
-
   "dependencies:development": {
-    "spade-qunit": "~> 1.0.0"
+    "spade-qunit": "~> 1.0.0",
+    "qunit": ">= 0"
   },
-  
   "bpm:build": {
-    
     "bpm_libs.js": {
-      "files": ["lib"],
-      "modes":        "*"
+      "files": [
+        "lib"
+      ],
+      "modes": "*"
     },
-    
-    "bpm_tests.js": {
-      "files": ["tests"],
-      "modes": ["debug"]
+    "sc-uikit/bpm_tests.js": {
+      "files": [
+        "tests"
+      ],
+      "modes": [
+        "debug"
+      ]
     }
   }
-
 }
-
