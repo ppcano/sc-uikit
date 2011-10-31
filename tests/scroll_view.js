@@ -6,7 +6,6 @@ require('sc-uikit')
 var set = SC.set;
 var get = SC.get;
 
-var mainView;
 
 var max = 100
 , i = 0
@@ -17,14 +16,14 @@ module("ScrollView test", {
 
   setup: function() {
 
-    console.group('ScrollView Test - Setup for new test');
+    console.group(' - Setup for new test');
 
     // App: must be global var, to be reached via getPath
     App = SC.Application.create({});
 
-
     for(i=0; i< max; i++) {
-      content.push( SC.Object.create({ position:i, name: 'ppcanodehuelva' } ) );
+      content.push( SC.Object.create( { position: i, name: 'ppcanodehuelva' } ) );
+
     }
 
     App.contentController = SC.ArrayController.create({
@@ -40,7 +39,7 @@ module("ScrollView test", {
 
     });
 
-    mainView = UI.Kit.ScrollView.create({
+    App.mainView = UI.Kit.ScrollView.create({
        elementId:"scroll_view",
 
        itemViewClass:  SC.View.extend({
@@ -53,15 +52,20 @@ module("ScrollView test", {
 
     SC.run(function() {
 
-      mainView.append();
+      App.mainView.append();
 
     });
 
   },
 
   teardown: function() {
-    mainView.destroy();
 
+    content = [];
+
+    //App.contentController.destroy();
+    //App.scrollViewController.destroy();
+
+    App.mainView.destroy();
     App.destroy();
 
     console.groupEnd();
@@ -69,11 +73,58 @@ module("ScrollView test", {
 
 });
 
-test("Properties has been assigned..........", function() {
+test("should render a li element for each item in content", function() {
 
-  console.log( $('#scroll_view div ul li').length );
+  //console.log( App.mainView.$('div ul li') );
 
   equals($('#scroll_view div ul li').length, max, " there are number of li === max");
+
+  equals(App.mainView.$('div ul li').length, max, " there are number of li === max");
+
+});
+
+test("should remove an item in DOM when removed an item from the content ", function() {
+
+
+  //equals(SC.getPath('App.mainView._listView.content').length, max, " there are items === max");
+
+  equals(SC.getPath('App.scrollViewController.content').length, max, " there are items === max");
+  equals(App.mainView.$('div ul li').length, max, " there are number of li === max");
+
+
+  SC.run(function() { 
+
+      content.insertAt(1, SC.Object.create( { position: 100, name: 'ppcanodehuelva' } ) );
+
+  });
+
+
+  equals(SC.getPath('App.scrollViewController.content').length, max+1, " there are items === max");
+
+  equals(App.mainView.$('div ul li').length, max+1, " there are number of li === max");
+
+
+});
+
+test("should remove an item in DOM when removed an item from the content ", function() {
+
+
+  equals(SC.getPath('App.scrollViewController.content').length, max, " there are items === max");
+
+  equals(App.mainView.$('div ul li').length, max, " there are number of li === max");
+
+
+  SC.run(function() { // require for applying the binding
+
+    content.removeAt(1);
+
+  });
+
+
+  equals(SC.getPath('App.scrollViewController.content').length, max-1, " there are items === max");
+
+  equals(App.mainView.$('div ul li').length, max-1, " there are number of li === max");
+
 
 });
 
