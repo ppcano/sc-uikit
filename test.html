@@ -20,14 +20,17 @@
 
     <script type="text/javascript" charset="utf-8">
       /*globals spade */
+      //var match = /^sc-uikit\/~tests/;
+      //var match =/~tests\/*_test/;  
+      //var match =/~tests/;  // all
+      var match =/~tests\/[A-Za-z0-9-_]+_test/; 
       for(var moduleId in spade._factories) {
-        //if (moduleId.match(/^sc-uikit\/~tests/)) {
-          //console.log( moduleId );
-        if (moduleId.match(/~tests/)) {
-          //console.log( ' match ============ ' );
+      //    console.log( moduleId );
+        if (moduleId.match(match)) {
+      //    console.log( ' match ============ ' );
           spade.require(moduleId);
         }
       }
     </script>
   </body>
-</html>
+
