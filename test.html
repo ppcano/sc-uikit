@@ -21,9 +21,9 @@
     <script type="text/javascript" charset="utf-8">
       /*globals spade */
       //var match = /^sc-uikit\/~tests/;
-      //var match =/~tests\/*_test/;  
       //var match =/~tests/;  // all
-      var match =/~tests\/[A-Za-z0-9-_]+_test/; 
+      //var match =/~tests\/[A-Za-z0-9-_]+_test/; // only on tests directory
+      var match =/~tests\/[^\n]+_test/; // only on tests directory
       for(var moduleId in spade._factories) {
       //    console.log( moduleId );
         if (moduleId.match(match)) {

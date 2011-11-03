@@ -1,73 +1,21 @@
-
 require('sproutcore');
 require('sproutcore-ui');
 require('sc-uikit')
 
 var set = SC.set, get = SC.get;
 
-
 var max = 100
 , i = 0
 , name = 'ppcanodehuelva'
-, content = [];
+, items = [];
 
-
-
-
-CustomArrayController = SC.ArrayController.extend({
-
-  content: null,
-
-  sortedContent:null,
-
-  _orderContent: function() {
-
-    var content = get(this, 'content');
-
-    if ( content ) {
-
-      var result = SC.copy( content );
-
-      result = result.sort( function( a, b ) {
-        return a.get('position') - b.get('position');
-      }); 
-
-      var currentSortedContent = get(this, 'sortedContent') 
-
-      if (!currentSortedContent) currentSortedContent = [];
-
-      var i=0 
-        , currentMax = currentSortedContent.length
-        , max = result.length;
-
-      for ( i=0; i<currentMax; i++) {
-          currentSortedContent.popObject();  
-      }
-      
-      for ( i=0; i<max; i++) {
-          currentSortedContent.pushObject( result[i] );  
-      }
-
-      set(this, 'sortedContent',  currentSortedContent );
-
-// TODO
-//      notifyWillChange
-//      set(this, 'sortedContent',  result );
-//      notifyDidChange
-
-    }
-
-  }.observes('@each.position')
-
-});
-
-Item = SC.Object.extend({
+TestItem = SC.Object.extend({
   position: null,
   name: null
 });
 
 function _createObject( position ) {
-  return Item.create( { position: position, name: name , origin: position} );
+  return TestItem.create( { position: position, name: name , origin: position} );
 }
 
 module("ScrollView test", {
@@ -81,31 +29,25 @@ module("ScrollView test", {
 
     for(i=0; i< max; i++) {
 
-      content.push( _createObject(i) );
+      items.push( _createObject(i) );
 
     }
 
-    App.controller = CustomArrayController.create({
-      content: content
+    App.controller = Client.LiveItemsController.create({
+      content: items
     }); 
 
 
 
-
-    //SC.run(function() {
-
-      App.scrollViewController = UI.Kit.ScrollViewController.create({
-        //contentBinding: 'App.controller.sortedContent' 
-        //contentBinding: 'App.contentController' 
-      });
-
-    //});
+    App.scrollViewController = UI.Kit.ScrollViewController.create({
+      //contentBinding: 'App.controller.sortedContent' 
+      //contentBinding: 'App.contentController' 
+    });
 
 
-    //App.view = CustomView.create({
     App.view = UI.Kit.ScrollView.create({
        elementId:"scroll_view",
-       myContent: 'App.controller.sortedContent', 
+       content: 'App.controller.sortedContent', 
        //itemViewContent: SC.getPath('App.controller.sortedContent'), 
        itemViewClass:  SC.View.extend({
          template: SC.Handlebars.compile('{{content.position}} {{content.name}}')
@@ -118,15 +60,13 @@ module("ScrollView test", {
 
       App.view.append();
 
-      console.log( App.view );
-
     });
 
   },
 
   teardown: function() {
 
-    content = [];
+    items = [];
 
     //App.contentController.destroy();
     //App.scrollViewController.destroy();
@@ -145,8 +85,7 @@ test("should remove an item in DOM when removed an item from the content ", func
 
   SC.run(function() { 
 
-    var c = content;
-    c.removeAt(0);
+    items.removeAt(0);
 
   });
 
@@ -165,7 +104,7 @@ test("should sort elements view when position changes", function() {
 
   SC.run(function() {
 
-     content.objectAt(0).set('position', last_position);
+     items.objectAt(0).set('position', last_position);
 
   });
 
@@ -195,8 +134,7 @@ test("should add an item in DOM when added an item from the content ", function(
 
   SC.run(function() { 
     
-      var c = content;
-      c.insertAt(1, _createObject(100) );
+      items.insertAt(1, _createObject(100) );
 
   });
 
