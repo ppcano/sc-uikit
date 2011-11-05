@@ -9,6 +9,8 @@ var max = 100
 , controller
 , items = [];
 
+
+// TODO: test failing................................. ( found a better solution for the test )
 // inspired : runtime/tests/mixin/array_test.js
 CustomObserver = SC.Object.extend({
 

@@ -1,9 +1,11 @@
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>QUnit Test Runner</title>
     <link rel="stylesheet" type="text/css" href="assets/qunit/qunit_styles.css" />
+    <link rel="stylesheet" type="text/css" href="assets/bpm_styles.css" />
   </head>
   <body>
     <h1 id="qunit-header"></h1>
@@ -16,6 +18,7 @@
     <script src="assets/bpm_libs.js" type="text/javascript"></script>
     <script src="assets/qunit/qunit_libs.js" type="text/javascript"></script>
 
+    <script src="assets/bpm_libs.js" type="text/javascript"></script>
     <script src="assets/sc-uikit/bpm_tests.js" type="text/javascript"></script>
 
     <script type="text/javascript" charset="utf-8">
@@ -23,13 +26,26 @@
       //var match = /^sc-uikit\/~tests/;
       //var match =/~tests/;  // all
       //var match =/~tests\/[A-Za-z0-9-_]+_test/; // only on tests directory
+
       var match =/~tests\/[^\n]+_test/; // only on tests directory
-      for(var moduleId in spade._factories) {
-      //    console.log( moduleId );
-        if (moduleId.match(match)) {
-      //    console.log( ' match ============ ' );
-          spade.require(moduleId);
+      //var test = "sc-uikit/~tests/client/collection_view_works_with_live_items_controller_test";
+
+      var unique_test = "sc-uikit/~tests/client/collection_view_works_with_live_items_controller_test";
+
+      var unique_test = null; // to test ALL
+      if ( !unique_test ) {
+
+        for(var moduleId in spade._factories) {
+            //console.log( moduleId );
+          if (moduleId.match(match)) {
+            //console.log( ' match ============ ' );
+            spade.require(moduleId);
+          }
         }
+      } else {
+
+            //console.log( unique_test );
+            spade.require(unique_test);
       }
     </script>
   </body>

@@ -25,6 +25,11 @@
       ],
       "modes": "*"
     },
+    "bpm_styles.css": {
+      "files": [
+        "css"
+      ]
+    },
     "sc-uikit/bpm_tests.js": {
       "files": [
         "tests"

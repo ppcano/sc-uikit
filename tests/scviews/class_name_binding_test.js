@@ -2,18 +2,12 @@ require('sproutcore');
 
 var set = SC.set, get = SC.get;
 
-var max = 100
-, i = 0
-, name = 'name'
-, controller
-, content = [];
-
 Item = SC.Object.extend({
   position: null,
   enabled: true,
-  voted: true,
-  name: null
+  voted: true
 });
+
 
 ItemView = SC.View.extend({
 
@@ -34,12 +28,11 @@ ItemView = SC.View.extend({
 
   }.property('content.voted').cacheable(),
 
-  template: SC.Handlebars.compile('{{content.position}} {{content.name}}')
+  template: SC.Handlebars.compile('{{content.position}} ')
 
 });
 
-
-module("Array Firing test", {
+module("Class name Binding Tests", {
 
   setup: function() {
     console.group(' - Problem: Setup for new test');
@@ -55,7 +48,6 @@ test("updating position fires only once", function() {
 
   var item = Item.create({ 
     position: 5, 
-    name: name , 
     voted: true,
     enabled: true
   });

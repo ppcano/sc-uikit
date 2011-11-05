@@ -1,0 +1,26 @@
+
+1) class_name_binding_tests
+
+  set css classnames for
+    *enabled
+    *voted
+
+  attribute_bindings ( not required )
+
+2) css_property_binding_tests
+  *set height property of scrollbar
+
+3) live_items_controller_test
+  * order the list of models tracks depending on vote
+
+4) live_item_problem_test
+
+present a REVIEW ( in a isolated test ) of live_item_controller for
+performance optimization
+
+5) collection_view_works_with_live_items_controllers
+  check that Inserting/Updating position/Removing updates the DOM
+
+
+
+
