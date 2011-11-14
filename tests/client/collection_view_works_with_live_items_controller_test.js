@@ -34,9 +34,8 @@ module("CollectionView with LiveItemController test", {
   teardown: function() {
 
     content = [];
-
-
     console.groupEnd();
+
   }  
 
 });

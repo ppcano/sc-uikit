@@ -4,6 +4,7 @@
   "summary": "SproutCore UI Kit",
   "author": "Pepe Cano",
   "version": "1.0.0",
+
   "directories": {
     "lib": "lib",
     "tests": "tests"
@@ -18,13 +19,16 @@
     "spade-qunit": "~> 1.0.0",
     "qunit": ">= 0"
   },
+
   "bpm:build": {
     "bpm_libs.js": {
       "files": [
-        "lib"
+        "lib",
+        "templates"
       ],
       "modes": "*"
     },
+
     "bpm_styles.css": {
       "files": [
         "css"
