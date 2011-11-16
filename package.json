@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "spade": ">= 0",
+    "sproutcore-statechart": "2.0.beta.4",
     "sproutcore-ui": "~> 2.0",
     "sproutcore-touch": ">= 0",
     "sproutcore": ">= 0"
