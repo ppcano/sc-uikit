@@ -1,27 +1,32 @@
 @c_white: #fafafa;
 @c_red: red;
+@c_gray_bg: #555;
+
+@fs_b: 1.5em;
+@fs_n: 1em;
+@fs_s: 0.7em;
 
 #header {
 
 	position:absolute;
-	top:0; left:0;
+	top:0; 
+  left:0;
 	width:100%;
-	height:45px;
-	line-height:45px;
+	height: 9.375%; 
+  //line-height:45px;
 
 	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #fe96c9), color-stop(0.05, #d51875), color-stop(1, #7b0a2e));
 	background-image:-moz-linear-gradient(top, #fe96c9, #d51875 5%, #7b0a2e);
 	background-image:-o-linear-gradient(top, #fe96c9, #d51875 5%, #7b0a2e);
 
 	color:#eee;
-	font-size:20px;
+	font-size: @fs_b;
 	text-align:center;
 
   a {
     color:#f3f3f3;
     text-decoration:none;
     font-weight:bold;
-    text-shadow:0 -1px 0 rgba(0,0,0,0.5);
   }
 
 }
@@ -30,9 +35,11 @@
 
 	position:absolute; 
   z-index:1;
-	top:45px; bottom:48px; left:0;
+	top: 9.375%; 
+  bottom: 10%; 
+  left:0;
 	width:100%;
-	background:#555;
+	background:@c_gray_bg;
 	//overflow:auto;
 	overflow:hidden;
 
@@ -50,21 +57,21 @@
       text-align:left;
 
       .itemview {
-        padding:0 10px;
-        height:180px;
-        line-height:40px;
+        padding:0 4%; // flexible: relates of the width of the element 
+        height:30%;
+        //line-height:40px;
+
+        //TODO: here responsive design
         border-bottom:1px solid #ccc;
         border-top:1px solid #fff;
         background-color:@c_white;
-        font-size:14px;
+        font-size:@fs_n;
 
         .izq {
-          font-size:10px;
           color: blue;
         }
 
         .der {
-          font-size:20px;
           color: red;
         }
 
@@ -84,17 +91,25 @@
 
 }
 
+
+@tabNumbers: 2;
+@borderFiller: 1px;
+
+@width: 'document.body.clientHeight';
+//@width: document.documentElement.clientHeight;
+
 #footer {
+
 	position:absolute;
 	bottom:0; left:0;
 	padding:0;
 	width:100%;
-	height:48px;
+	height:10%;  
 
 	background-image:-webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #999), color-stop(0.02, #666), color-stop(1, #222));
 	background-image:-moz-linear-gradient(top, #999, #666 2%, #222);
 	background-image:-o-linear-gradient(top, #999, #666 2%, #222);
-  //background-color: #666;
+
 	border-top:1px solid #444;
 
   ul { 
@@ -104,23 +119,20 @@
       float: left;
       height:100%;
 
-      border:1px solid @c_white; 
+      //border: @borderFiller solid @c_white; 
+      width: 100%/@tabNumbers;
+
+      font-size:@fs_s;
+      color: @c_white;
+      //width: @width/@tabNumbers;
       //display: block;
 
       .name {
-
-        top:10px; 
-        color: @c_white;
-        font-size:12px;
-
+        top:20%;  // padding?
       }
 
       .img {
-
-        bottom:10px; 
-        color: @c_white;
-        font-size:10px;
-
+        bottom:20%;  // could be a padding?
       }
 
       // has more weight cause of being after the other declarations
@@ -134,3 +146,18 @@
 
 }
 
+/* tabNumbers in SC is
+// TODO: perhaps better do it on other CSSPropertyBinding on View
+var footer = get(self, '_footerView'); 
+var element = $('#footer ul li'); 
+
+var borderLeft = element.css('border-left-width'); 
+var borderRight = element.css('border-right-width'); 
+
+borderLeft = parseInt( borderLeft, 10);
+borderRight = parseInt( borderRight, 10);
+
+var tabWidth = (deviceWidth/tabs.length)-borderLeft-borderRight; 
+
+element.width(tabWidth);
+*/ 
